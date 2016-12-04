@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+	<head>
+		<title>canvasExample</title>
+        <meta charset='utf-8' />
+	</head>
+	<body>
+                <canvas height='320' width='480' id='example'>Обновите браузер</canvas>
+		<script>
+			var example = document.getElementById("example"),
+			    ctx     = example.getContext('2d');
+			    ctx.fillStyle = "tomato";
+			ctx.fillRect(0, 0, example.width, example.height);
+			ctx.beginPath();
+			ctx.moveTo(0, 0);
+			ctx.strokeStyle = "black";
+			
+			var curve = quadraticBezier(0, 0, 300, 300);
+			curve.forEach(function(t){
+                            ctx.lineTo(t.x, t.y);
+			});
+			
+			curve = cubicBezier(300, 300, 150, 0);
+			curve.forEach(function(t){
+                            ctx.lineTo(t.x, t.y);
+			});
+			ctx.stroke();
+			
+			
+			
+			function quadraticBezier(x0, y0, x1, y1){
+                            var direction = 0;
+                            
+                            var b = [];
+                            var sourceX = x0;
+                            var sourceY = y0;
+                            var targetX = x1;
+                            var targetY = y1;
+                            var x = ((targetX-sourceX)/4);
+                            var y = (targetY-sourceY)/4*3;
+                            var two = {x: x, y: y};
+                            
+                        
+                            var t = [];
+                            var max = 0;
+                            do{
+                                t.push(max);
+                                max += 0.001;
+                            }
+                            while(max < 1);
+                            t.forEach(function(t){
+                                    var x = Math.pow(1-t, 2)*sourceX + 2*(1-t)*t*two.x +t*t*targetX;
+                                    var y = Math.pow(1-t, 2)*sourceY + 2*(1-t)*t*two.y +t*t*targetY;
+                                    b.push({x: x, y: y});
+                            });
+                            return b;
+			}
+			
+			
+			function cubicBezier(x0, y0, x1, y1){
+                            var direction = 0;
+                            
+                            var b = [];
+                            var sourceX = x0;
+                            var sourceY = y0;
+                            var targetX = x1;
+                            var targetY = y1;
+                            var x = (((targetX-sourceX)/2)+sourceX);
+                            var two = {x: x, y: sourceY};
+                            var three = {x: x, y: targetY};
+                        
+                            var t = [];
+                            var max = 0;
+                            do{
+                                t.push(max);
+                                max += 0.001;
+                            }
+                            while(max < 1);
+                            t.forEach(function(t){
+                                    var x = Math.pow(1-t, 3)*sourceX + 3*Math.pow(1-t, 2)*t*two.x +( 3*(1-t)*Math.pow(t, 2)*three.x ) + Math.pow(t, 3)*targetX;
+                                    var y = Math.pow(1-t, 3)*sourceY + 3*Math.pow(1-t, 2)*t*two.y +( 3*(1-t)*Math.pow(t, 2)*three.y ) + Math.pow(t, 3)*targetY;
+                                    b.push({x: x, y: y});
+                            });
+                            return b;
+			}
+		</script>
+	</body>
+</html>
