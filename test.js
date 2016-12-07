@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 let {log_ln, pause, resume, string_of} = std.utils;
 let {t_tab, t_rect} = std.classes;
 let {BROWSER} = std.globals;
 let {base64_encode} = std.cipher;
 
-import ManBehavior from './ManBehavior.js';
+import ManBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/ManBehavior.js';
 
 let tab = BROWSER.new_tab();
 tab.on_load_end = function(){
@@ -17,7 +17,7 @@ pause(4000);
 let s = base64_encode(image.get_bytes());
 log_ln(string_of(s));*/
 
-let man = new ManBehaviour();
+let man = new ManBehavior();
 man.mouseMove({x: '100px', y: '0px'}, 'document');
 
 
