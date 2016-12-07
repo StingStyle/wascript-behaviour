@@ -1,8 +1,8 @@
 'use sctrict';
 
-import IBehavior from './IBehavior.js';
+import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
 
-const ManMouseMove = function(currentPoint, targetSelector){
+export const ManMouseMove = function(currentPoint, targetSelector){
     
 }
 
