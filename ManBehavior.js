@@ -10,7 +10,7 @@ export const ManMouseMove = function(currentPoint, targetSelector, maxMoveTime){
     var target = undefined;
     switch(typeof targetSelector){
         case 'string': 
-            target = document.querySelector(targetSelector);
+            target = frame.eval('document').querySelector(targetSelector);
             break;
         case 'object':
             target = targetSelector;

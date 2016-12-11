@@ -1,6 +1,12 @@
 'use strict';
 
 export default class IBehavior{
+    frame;
+    
+    constructor(frame){
+        this.frame = frame;    
+    }
+    
     click(targetSelector){}
     
     readContent(targetSelector, timeInMilliseconds){}
