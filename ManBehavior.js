@@ -5,6 +5,7 @@ let {t_tab, t_rect} = std.classes;
 let {BROWSER} = std.globals;
 
 import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
+//import IBehavior from 'beh/IBehavior.js';
 
 export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){    
     if(targetElement !== undefined){

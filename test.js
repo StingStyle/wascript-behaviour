@@ -5,6 +5,7 @@ let {BROWSER} = std.globals;
 let {base64_encode} = std.cipher;
 
 import ManBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/ManBehavior.js';
+//import ManBehavior from 'beh/ManBehavior.js';
 
 let tab = BROWSER.new_tab();
 tab.on_load_end = function(){
@@ -17,8 +18,8 @@ pause(4000);
 let s = base64_encode(image.get_bytes());
 log_ln(string_of(s));*/
 
-var target = tab.eval('document').querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
-
+var target = tab.main_frame.eval('document').querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
+log_ln('0');
 let man = new ManBehavior();
 man.mouseMove({x: '0px', y: '0px'}, target);
 
