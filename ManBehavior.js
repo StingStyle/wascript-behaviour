@@ -9,6 +9,7 @@ import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascrip
 
 export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){    
     if(targetElement !== undefined){
+        log_ln('1');
         var targetBox = targetElement.getBoundingClientRect();
         var targetX = getRandomArbitrary(targetBox.left, targetBox.right);
         var targetY = getRandomArbitrary(targetBox.top, targetBox.bottom);
