@@ -17,8 +17,10 @@ pause(4000);
 let s = base64_encode(image.get_bytes());
 log_ln(string_of(s));*/
 
-let man = new ManBehavior(tab);
-man.mouseMove({x: '0px', y: '0px'}, 'a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
+var target = tab.eval('document').querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
+
+let man = new ManBehavior();
+man.mouseMove({x: '0px', y: '0px'}, target);
 
 
 log_ln('test');

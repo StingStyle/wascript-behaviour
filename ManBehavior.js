@@ -6,19 +6,9 @@ let {BROWSER} = std.globals;
 
 import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
 
-export const ManMouseMove = function(currentPoint, targetSelector, maxMoveTime){
-    var target = undefined;
-    switch(typeof targetSelector){
-        case 'string': 
-            target = frame.eval('document').querySelector(targetSelector);
-            break;
-        case 'object':
-            target = targetSelector;
-            break;
-    }
-    
-    if(target !== undefined){
-        var targetBox = target.getBoundingClientRect();
+export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){    
+    if(targetElement !== undefined){
+        var targetBox = targetElement.getBoundingClientRect();
         var targetX = getRandomArbitrary(targetBox.left, targetBox.right);
         var targetY = getRandomArbitrary(targetBox.top, targetBox.bottom);
         curve = cubicBezier(currentPoint.x, currentPoint.y, targetX, targetY);
@@ -28,12 +18,12 @@ export const ManMouseMove = function(currentPoint, targetSelector, maxMoveTime){
         });
     }
     
-    return target;
+    return targetElement;
 }
 
 export default class ManBehavior extends IBehavior{
-    mouseMove(currentPoint, targetSelector){
-        ManMouseMove(currentPoint, targetSelector, 8);
+    mouseMove(currentPoint, targetElement){
+        ManMouseMove(currentPoint, targetElement, 8);
     }
 }
 
