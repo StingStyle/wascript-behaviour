@@ -1,8 +1,6 @@
 'use strict';
 
 export default class IBehavior{
-    frame;
-    
     constructor(frame){
         this.frame = frame;    
     }
