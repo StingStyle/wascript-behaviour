@@ -4,7 +4,7 @@ let {t_tab, t_rect} = std.classes;
 let {BROWSER} = std.globals;
 let {base64_encode} = std.cipher;
 
-import ManBehavior from './ManBehavior.js';
+import ManBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/ManBehavior.js';
 
 let tab = BROWSER.new_tab();
 tab.on_load_end = function(){
@@ -18,7 +18,7 @@ let s = base64_encode(image.get_bytes());
 log_ln(string_of(s));*/
 
 let man = new ManBehaviour();
-man.mouseMove({x: '100px', y: '0px'}, 'document');
+man.mouseMove({x: '0px', y: '0px'}, 'a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
 
 
 log_ln('test');
