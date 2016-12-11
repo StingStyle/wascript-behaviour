@@ -17,7 +17,7 @@ pause(4000);
 let s = base64_encode(image.get_bytes());
 log_ln(string_of(s));*/
 
-let man = new ManBehaviour();
+let man = new ManBehavior(tab);
 man.mouseMove({x: '0px', y: '0px'}, 'a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
 
 
