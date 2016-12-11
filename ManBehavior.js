@@ -24,7 +24,7 @@ export const ManMouseMove = function(currentPoint, targetSelector, maxMoveTime){
         curve = cubicBezier(currentPoint.x, currentPoint.y, targetX, targetY);
         curve.forEach(function(t){
             pause(getRandomArbitrary(0, maxMoveTime));
-            t_tab.send_mouse_move_event({t.x: , t.y:});
+            t_tab.send_mouse_move_event({x: t.x, y: t.y});
         });
     }
     
