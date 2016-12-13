@@ -1,6 +1,10 @@
 'use strict';
 
-export default class IBehavior{    
+export default class IBehavior{
+    constructor(tab){
+        this.tab = tab;
+    }
+    
     click(targetSelector){}
     
     readContent(targetSelector, timeInMilliseconds){}
