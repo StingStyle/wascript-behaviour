@@ -1,6 +1,6 @@
 'use strict';
 
-export default class IBehavior{
+export default class IBehavior{    
     click(targetSelector){}
     
     readContent(targetSelector, timeInMilliseconds){}
