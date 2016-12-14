@@ -17,9 +17,6 @@ export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){
         curve.forEach(function(t, i){
             var p = Math.floor(getRandomArbitrary(0, maxMoveTime));
             pause(p < 1 ? 1 : p);
-            if(i === 596){
-                log_ln(t.x);
-            }
             var mouseEvent = new t_mouse_event();
             mouseEvent.x = t.x;
             mouseEvent.y = t.y;
@@ -30,13 +27,35 @@ export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){
     return {x: targetX, y: targetY};
 }
 
+export const ManClick = function(currentPoint, targetElement){    
+    if(targetElement !== undefined){
+        var targetBox = targetElement.getBoundingClientRect();
+        var targetX = getRandomArbitrary(targetBox.left, targetBox.right);
+        var targetY = getRandomArbitrary(targetBox.top, targetBox.bottom);
+       
+        var mouseEvent = new t_mouse_event();
+        mouseEvent.x = targetX;
+        mouseEvent.y = targetY;
+        this.tab.send_mouse_click_event(mouseEvent);
+    }
+    
+    return {x: targetX, y: targetY};
+}
+
 export default class ManBehavior extends IBehavior{
     constructor(tab){
         super(tab);
+        
+        this.MAX_MOVE_TIME = 8; //in ms
     }
     
     mouseMove(currentPoint, targetElement){
-       ManMouseMove.call(this, currentPoint, targetElement, 8);
+       return ManMouseMove.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME);
+    }
+    
+    click(currentPoint, targetElement){
+        ManMouseMove.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME);
+        //return ManClick.call(this, currentPoint, targetElement);
     }
 }
 

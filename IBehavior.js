@@ -5,7 +5,11 @@ export default class IBehavior{
         this.tab = tab;
     }
     
-    click(targetSelector){}
+    //
+    // currentPoint - {x, y} - pixels by window
+    // target - element object. For example, result of document.querySelector
+    //
+    click(currentPoint, targetSelector){}
     
     readContent(targetSelector, timeInMilliseconds){}
     
@@ -15,8 +19,9 @@ export default class IBehavior{
     
     //
     // currentPoint - {x, y} - pixels by window
+    // target - element object. For example, result of document.querySelector
     //
-    mouseMove(currentPoint, targetSelector){}
+    mouseMove(currentPoint, target){}
     
     fillField(targetSelector, value){}
 }
