@@ -4,8 +4,8 @@ let {log_ln, pause, resume, string_of} = std.utils;
 let {t_mouse_event, t_mouse_button} = std.classes;
 let {BROWSER} = std.globals;
 
-import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
-//import IBehavior from 'beh/IBehavior';
+//import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
+import IBehavior from 'beh/IBehavior';
 
 export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){    
     let targetPoint = currentPoint;
