@@ -8,21 +8,25 @@ export default class IBehavior{
     //
     // currentPoint - {x, y} - pixels by window
     // target - element object. For example, result of document.querySelector
-    // if target if undefined click will be made by current point
     //
-    click(currentPoint, target){}
-    
-    readContent(targetSelector, timeInMilliseconds){}
-    
-    scroll(deltaPixels){}
-    
-    selectText(){}
+    mouseMove(currentPoint, target){}
     
     //
     // currentPoint - {x, y} - pixels by window
     // target - element object. For example, result of document.querySelector
+    // if target if undefined click will be made by current point
     //
-    mouseMove(currentPoint, target){}
+    click(currentPoint, target){}
+    
+    scroll(deltaPixels){}
+    
+    readContent(targetSelector, timeInMilliseconds){}
+    
+    
+    
+    selectText(){}
+    
+    
     
     fillField(targetSelector, value){}
 }
