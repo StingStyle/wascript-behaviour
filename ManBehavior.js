@@ -22,7 +22,7 @@ export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){
             const mouseEvent = new t_mouse_event();
             mouseEvent.x = t.x;
             mouseEvent.y = t.y;
-            _self.tab.send_mouse_move_event(mouseEvent, t_mouse_button);
+            _self.tab.send_mouse_move_event(mouseEvent);
         });
     }
     
@@ -38,7 +38,7 @@ export const ManClick = function(currentPoint, targetElement, maxMoveTime){
     const mouseEvent = new t_mouse_event();
     mouseEvent.x = targetPoint.x;
     mouseEvent.y = targetPoint.y;
-    this.tab.send_mouse_click_event(mouseEvent);
+    this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT);
     
     return targetPoint;
 }
