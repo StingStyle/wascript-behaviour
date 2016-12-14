@@ -8,8 +8,9 @@ export default class IBehavior{
     //
     // currentPoint - {x, y} - pixels by window
     // target - element object. For example, result of document.querySelector
+    // if target if undefined click will be made by current point
     //
-    click(currentPoint, targetSelector){}
+    click(currentPoint, target){}
     
     readContent(targetSelector, timeInMilliseconds){}
     

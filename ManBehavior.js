@@ -1,45 +1,46 @@
 'use sctrict';
 
 let {log_ln, pause, resume, string_of} = std.utils;
-let {t_mouse_event} = std.classes;
+let {t_mouse_event, t_mouse_button} = std.classes;
 let {BROWSER} = std.globals;
 
 //import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
 import IBehavior from 'beh/IBehavior';
 
 export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){    
+    let targetPoint = currentPoint;
     if(targetElement !== undefined){
-        var targetBox = targetElement.getBoundingClientRect();
-        var targetX = getRandomArbitrary(targetBox.left, targetBox.right);
-        var targetY = getRandomArbitrary(targetBox.top, targetBox.bottom);
-        var curve = cubicBezier(currentPoint.x, currentPoint.y, targetX, targetY);
-        var _self = this;
+        const targetBox = targetElement.getBoundingClientRect();
+        const targetX = getRandomArbitrary(targetBox.left, targetBox.right);
+        const targetY = getRandomArbitrary(targetBox.top, targetBox.bottom);
+        targetPoint = {x: targetX, y: targetY};
+        const curve = cubicBezier(currentPoint.x, currentPoint.y, targetX, targetY);
+        const _self = this;
         curve.forEach(function(t, i){
-            var p = Math.floor(getRandomArbitrary(0, maxMoveTime));
+            const p = Math.floor(getRandomArbitrary(0, maxMoveTime));
             pause(p < 1 ? 1 : p);
-            var mouseEvent = new t_mouse_event();
+            const mouseEvent = new t_mouse_event();
             mouseEvent.x = t.x;
             mouseEvent.y = t.y;
-            _self.tab.send_mouse_move_event(mouseEvent);
+            _self.tab.send_mouse_move_event(mouseEvent, t_mouse_button);
         });
     }
     
-    return {x: targetX, y: targetY};
+    return targetPoint;
 }
 
-export const ManClick = function(currentPoint, targetElement){    
+export const ManClick = function(currentPoint, targetElement, maxMoveTime){    
+    let targetPoint = currentPoint;
     if(targetElement !== undefined){
-        var targetBox = targetElement.getBoundingClientRect();
-        var targetX = getRandomArbitrary(targetBox.left, targetBox.right);
-        var targetY = getRandomArbitrary(targetBox.top, targetBox.bottom);
-       
-        var mouseEvent = new t_mouse_event();
-        mouseEvent.x = targetX;
-        mouseEvent.y = targetY;
-        this.tab.send_mouse_click_event(mouseEvent);
+        targetPoint = ManMouseMove.call(this, currentPoint, targetElement, maxMoveTime); 
     }
     
-    return {x: targetX, y: targetY};
+    const mouseEvent = new t_mouse_event();
+    mouseEvent.x = targetPoint.x;
+    mouseEvent.y = targetPoint.y;
+    this.tab.send_mouse_click_event(mouseEvent);
+    
+    return targetPoint;
 }
 
 export default class ManBehavior extends IBehavior{
@@ -54,8 +55,7 @@ export default class ManBehavior extends IBehavior{
     }
     
     click(currentPoint, targetElement){
-        ManMouseMove.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME);
-        //return ManClick.call(this, currentPoint, targetElement);
+        return ManClick.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME);
     }
 }
 
