@@ -43,11 +43,62 @@ export const ManClick = function(currentPoint, targetElement, maxMoveTime){
     return targetPoint;
 }
 
+/**
+*   shift - px/wheel turn
+*   speed - scroll speed (turn count per time)
+*   maxDelay - turn delay
+*/
+export const ManScroll = function(currentPoint, delta, isHorizontal, direction, shift, speed, maxDelay){
+    const mouseEvent = new t_mouse_event();
+    mouseEvent.x = currentPoint.x;
+    mouseEvent.y = currentPoint.y;
+    
+    if(isHorizontal){
+        //TODO: send press 'shift' button
+    }
+    
+    if(delta <= shift){
+        const dx = isHorizontal ? ((direction == this.ASC) ? delta : -delta) : 0;
+        const dy = !isHorizontal ? ((direction == this.ASC) ? delta : -delta) : 0;
+        this.tab.send_mouse_wheel_event(mouseEvent, dx, dy);
+    } else {
+        /*
+            delta - need pixels count
+            shift - pixels per turn
+            speed - turns per fingermove
+        
+            delta/shift = у - count of turns
+            y/speed - count of findermoves    
+        */
+        
+        const y = Math.floor(delta/shift/speed);
+        let dt = Math.floor(delta/y);
+        let resultDt = 0;
+        for(let i=0; i<y; i++){
+            const p = Math.floor(getRandomArbitrary(0, maxDelay));
+            pause(p < 1 ? 1 : p);
+            
+            const dx = isHorizontal ? ((direction == this.ASC) ? dt : -dt) : 0;
+            const dy = !isHorizontal ? ((direction == this.ASC) ? dt : -dt) : 0;
+            this.tab.send_mouse_wheel_event(mouseEvent, dx, dy);
+            resultDt += dt;
+        }
+        
+        dt = delta - resultDt;
+        const dx = isHorizontal ? ((direction == this.ASC) ? dt : -dt) : 0;
+        const dy = !isHorizontal ? ((direction == this.ASC) ? dt : -dt) : 0;
+        this.tab.send_mouse_wheel_event(mouseEvent, dx, dy);
+    }
+}
+
 export default class ManBehavior extends IBehavior{
     constructor(tab){
         super(tab);
         
-        this.MAX_MOVE_TIME = 8; //in ms
+        this.MAX_MOVE_TIME  = 8;  //in ms
+        this.SCROLL_SHIFT   = 12; // pixels/wheel turn
+        this.SCROLL_SPEED   = 30; // count of turns per time
+        this.MAX_SCROLL_DELAY = 500 // in ms
     }
     
     mouseMove(currentPoint, targetElement){
@@ -56,6 +107,10 @@ export default class ManBehavior extends IBehavior{
     
     click(currentPoint, targetElement){
         return ManClick.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME);
+    }
+    
+    scroll(currentPoint, deltaPixels, isHorizontal, direction){
+        return ManScroll.call(this, currentPoint, deltaPixels, isHorizontal, direction, this.SCROLL_SHIFT, this.SCROLL_SPEED, this.MAX_SCROLL_DELAY);
     }
 }
 

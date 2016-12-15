@@ -3,6 +3,8 @@
 export default class IBehavior{
     constructor(tab){
         this.tab = tab;
+        this.ASC = 'asc';
+        this.DESC = 'desc';
     }
     
     //
@@ -18,15 +20,15 @@ export default class IBehavior{
     //
     click(currentPoint, target){}
     
-    scroll(deltaPixels){}
+    //
+    // currentPoint - {x, y} - pixels by window
+    // deltaPixels  - shifting in pixels
+    // isHorizontal - if value is true, shifting will be by X axis
+    // direction -  ASC or DESC
+    //
+    scroll(currentPoint, deltaPixels, isHorizontal, direction){}
     
-    readContent(targetSelector, timeInMilliseconds){}
-    
-    
-    
-    selectText(){}
-    
-    
-    
+    readContent(targetSelector, timeInMilliseconds){}    
+    selectText(){}    
     fillField(targetSelector, value){}
 }

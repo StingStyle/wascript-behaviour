@@ -21,17 +21,19 @@ tab.load("https://demo.antlace.com/");
 pause();
 
 log_ln('0');
+log_ln(new Date().getTime());
 var document = tab.main_frame.eval('document');
 var target = document.querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
 var aa = document.querySelectorAll('a');
 var target1 = aa[0];
 var target2 = aa[1];
 let man = new ManBehavior(tab);
-var targetP = man.mouseMove({x: 0, y: 0}, target1);
-targetP = man.mouseMove(targetP, target2);
-man.click(targetP, target);
+//var targetP = man.mouseMove({x: 0, y: 0}, target1);
+//targetP = man.mouseMove(targetP, target2);
+man.scroll({x: 100, y: 100}, 300, false, man.ASC);
+//man.click(targetP, target);
 
-
+log_ln(new Date().getTime());
 log_ln('test');
 
 
