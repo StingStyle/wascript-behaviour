@@ -5,6 +5,11 @@ export default class IBehavior{
         this.tab = tab;
         this.ASC = 'asc';
         this.DESC = 'desc';
+        
+        this.MAX_MOVE_TIME  = 8;  //in ms
+        this.SCROLL_SHIFT   = 12; // pixels/wheel turn
+        this.SCROLL_SPEED   = 30; // count of turns per time
+        this.MAX_SCROLL_DELAY = 500 // in ms
     }
     
     //
