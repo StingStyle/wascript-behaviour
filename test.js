@@ -4,8 +4,7 @@ let {t_tab, t_rect, t_mouse_button} = std.classes;
 let {BROWSER} = std.globals;
 let {base64_encode} = std.cipher;
 
-//import ManBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/ManBehavior.js';
-import ManBehavior from 'beh/ManBehavior';
+import ManBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/ManBehavior.js';
 
 let cnt = 0;
 let tab = BROWSER.new_tab();
