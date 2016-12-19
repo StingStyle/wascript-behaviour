@@ -7,7 +7,8 @@ let {base64_encode} = std.cipher;
 //import ManBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/ManBehavior.js';
 import ManBehavior from 'beh/ManBehavior';
 
-let cnt = 0;
+log_ln('asdasd');
+/*let cnt = 0;
 let tab = BROWSER.new_tab();
 
 tab.on_load_end = function(){
@@ -41,6 +42,6 @@ var img = tab.get_image();
 save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
 log_ln(new Date().getTime());
-log_ln('test');
+log_ln('test');*/
 
 

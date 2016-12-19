@@ -24,8 +24,8 @@ function WascriptMonitor(options){
         
         _self.canvas = document.createElement('canvas');
         _self.canvas.setAttribute('id', _self.CANVAS_ID);
-        _self.canvas.setAttribute('width', body.offsetWidth);
-        _self.canvas.setAttribute('height', body.offsetHeight);
+        _self.canvas.setAttribute('width', window.innerWidth);
+        _self.canvas.setAttribute('height', window.innerHeight);
         _self.canvas.style.position   = 'fixed';
         _self.canvas.style.top        = '0';
         _self.canvas.style.left       = '0';
