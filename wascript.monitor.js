@@ -1,3 +1,9 @@
+/**
+* Autor: Dmitry Skripunov (https://github.com/DmitrySkripunov)
+* Date: 19.12.2016 
+* For wascript redactor project
+*
+*/
 function WascriptMonitor(options){
     
     this.CANVAS_ID = 'wascript-monitor-canvas';
@@ -47,11 +53,14 @@ function WascriptMonitor(options){
             _self.Y = window.event.clientY;
         }
         
+        _self.ctx.globalAlpha = 0.6;
         _self.ctx.beginPath();
         _self.ctx.moveTo(_self.X, _self.Y);
         _self.ctx.lineTo(x, y);
+        _self.ctx.lineWidth = 5;s
         _self.ctx.strokeStyle = "black";
         _self.ctx.stroke();
+        _self.ctx.globalAlpha = 1;
         
         _self.X = x;
         _self.Y = y;
