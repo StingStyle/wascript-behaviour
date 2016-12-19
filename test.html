@@ -3,86 +3,168 @@
 	<head>
 		<title>canvasExample</title>
         <meta charset='utf-8' />
+        <script src="wascript-monitor.js"></script>
 	</head>
 	<body>
-                <canvas height='320' width='480' id='example'>Обновите браузер</canvas>
-		<script>
-			var example = document.getElementById("example"),
-			    ctx     = example.getContext('2d');
-			    ctx.fillStyle = "tomato";
-			ctx.fillRect(0, 0, example.width, example.height);
-			ctx.beginPath();
-			ctx.moveTo(0, 0);
-			ctx.strokeStyle = "black";
-			
-			var curve = quadraticBezier(0, 0, 300, 300);
-			curve.forEach(function(t){
-                            ctx.lineTo(t.x, t.y);
-			});
-			
-			curve = cubicBezier(300, 300, 150, 0);
-			curve.forEach(function(t){
-                            ctx.lineTo(t.x, t.y);
-			});
-			ctx.stroke();
-			
-			
-			
-			function quadraticBezier(x0, y0, x1, y1){
-                            var direction = 0;
-                            
-                            var b = [];
-                            var sourceX = x0;
-                            var sourceY = y0;
-                            var targetX = x1;
-                            var targetY = y1;
-                            var x = ((targetX-sourceX)/4);
-                            var y = (targetY-sourceY)/4*3;
-                            var two = {x: x, y: y};
-                            
-                        
-                            var t = [];
-                            var max = 0;
-                            do{
-                                t.push(max);
-                                max += 0.001;
-                            }
-                            while(max < 1);
-                            t.forEach(function(t){
-                                    var x = Math.pow(1-t, 2)*sourceX + 2*(1-t)*t*two.x +t*t*targetX;
-                                    var y = Math.pow(1-t, 2)*sourceY + 2*(1-t)*t*two.y +t*t*targetY;
-                                    b.push({x: x, y: y});
-                            });
-                            return b;
-			}
-			
-			
-			function cubicBezier(x0, y0, x1, y1){
-                            var direction = 0;
-                            
-                            var b = [];
-                            var sourceX = x0;
-                            var sourceY = y0;
-                            var targetX = x1;
-                            var targetY = y1;
-                            var x = (((targetX-sourceX)/2)+sourceX);
-                            var two = {x: x, y: sourceY};
-                            var three = {x: x, y: targetY};
-                        
-                            var t = [];
-                            var max = 0;
-                            do{
-                                t.push(max);
-                                max += 0.001;
-                            }
-                            while(max < 1);
-                            t.forEach(function(t){
-                                    var x = Math.pow(1-t, 3)*sourceX + 3*Math.pow(1-t, 2)*t*two.x +( 3*(1-t)*Math.pow(t, 2)*three.x ) + Math.pow(t, 3)*targetX;
-                                    var y = Math.pow(1-t, 3)*sourceY + 3*Math.pow(1-t, 2)*t*two.y +( 3*(1-t)*Math.pow(t, 2)*three.y ) + Math.pow(t, 3)*targetY;
-                                    b.push({x: x, y: y});
-                            });
-                            return b;
-			}
-		</script>
+           <menu>
+
+            <li><a href="/" class="active">Home</a></li>
+
+            <li><a href="/page1.html">Page #1</a></li>
+
+            <li><a href="/page2.html">Page #2</a></li>
+
+            <li><a href="/page3.html">Page #3</a></li>
+
+        </menu>
+
+        <h1>Title #1</h1>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <blockquote>
+
+            <h3>Yandex Metrika</h3>
+
+            <div class="form-group">
+
+                <label>URL</label>
+
+                <a href="https://metrika.yandex.ru/dashboard?id=41295834" target="_blank">https://metrika.yandex.ru/dashboard?id=41295834</a>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Login</label>
+
+                <input type="text" value="antlace" class="form-control">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="text" value="rOngHtnIaTeCHErt" class="form-control">
+
+            </div>
+
+        </blockquote>
+
+        <h1>Title #2</h1>
+
+        <div class="images">
+
+            <div><img src="img/img1.jpg"></div>
+
+            <div><img src="img/img2.jpg"></div>
+
+            <div><img src="img/img3.jpg"></div>
+
+            <div><img src="img/img4.jpg"></div>
+
+            <div><img src="img/img5.jpg"></div>
+
+            <div><img src="img/img6.jpg"></div>
+
+            <div><img src="img/img7.jpg"></div>
+
+            <div><img src="img/img8.jpg"></div>
+
+            <div><img src="img/img9.jpg"></div>
+
+            <div><img src="img/img10.jpg"></div>
+
+            <div><img src="img/img11.jpg"></div>
+
+        </div>
+
+        <h1>Title #3</h1>
+
+        <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? </p><p class="crazy">Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p><p> At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+
+        <form role="form" action="/page3.html">
+
+            <fieldset>
+
+                <legend>start</legend>
+
+                <div class="form-group">
+
+                    <label>Note</label>
+
+                    <input type="text" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Count</label>
+
+                    <input type="number" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Color</label>
+
+                    <input type="color" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Date</label>
+
+                    <input type="date" class="form-control">
+
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+
+                <legend>end</legend>
+
+                <div class="form-group">
+
+                    <label>Note</label>
+
+                    <input type="text" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Count</label>
+
+                    <input type="number" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Color</label>
+
+                    <input type="color" class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Date</label>
+
+                    <input type="date" class="form-control">
+
+                </div>
+
+            </fieldset>
+
+            <button type="submit">Submit</button>
+
+        </form>
+     <canvas id="wascript-monitor-canvas" width="300" height="150" style="border:1px solid #d3d3d3;">
 	</body>
 </html>
