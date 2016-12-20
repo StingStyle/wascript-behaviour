@@ -7,8 +7,8 @@ let {base64_encode} = std.cipher;
 //import ManBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/ManBehavior.js';
 import ManBehavior from 'beh/ManBehavior';
 
-log_ln('asdasd');
-/*let cnt = 0;
+
+let cnt = 0;
 let tab = BROWSER.new_tab();
 
 tab.on_load_end = function(){
@@ -22,6 +22,7 @@ tab.load("https://demo.antlace.com/");
 pause();
 
 
+/*
 log_ln('0');
 log_ln(new Date().getTime());
 var document = tab.main_frame.eval('document');
