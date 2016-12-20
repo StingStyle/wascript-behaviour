@@ -79,7 +79,7 @@ function WascriptMonitor(options){
     }
     
     this._onShowCanvas = function(evt){
-       if(evt.keyCode === 49){ // && evt.ctrlKey){
+       if(evt.keyCode === 18){ // && evt.ctrlKey){
            if(_self.canvas.style.display === 'none'){
                _self.canvas.style.display = 'block';
            }else{
