@@ -22,9 +22,10 @@ tab.load("https://demo.antlace.com/");
 pause();
 
 
-/*
 log_ln('0');
 log_ln(new Date().getTime());
+tab.press_key(18);
+pause(500);
 var document = tab.main_frame.eval('document');
 var target = document.querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
 var aa = document.querySelectorAll('a');
@@ -34,15 +35,15 @@ let man = new ManBehavior(tab);
 var targetP = man.mouseMove({x: 0, y: 0}, target1);
 //targetP = man.mouseMove(targetP, target2);
 //man.scroll({x: 100, y: 100}, 300, false, man.ASC);
-target2.style.border = '2px solid red';
-man.click(targetP, target2);
-pause(2000)
-var img = tab.get_image();
+//target2.style.border = '2px solid red';
+man.click(targetP, target);
 
-// Works in dev mode only.
+
+pause(2000);
+var img = tab.get_image();
 save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
 log_ln(new Date().getTime());
-log_ln('test');*/
+log_ln('test');
 
 
