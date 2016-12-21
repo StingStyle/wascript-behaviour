@@ -22,6 +22,10 @@ tab.load("https://demo.antlace.com/");
 pause();
 
 
+tab.on_paint = function() {
+    
+};
+
 log_ln('0');
 log_ln(new Date().getTime());
 tab.press_key(18);
@@ -33,17 +37,22 @@ var target1 = aa[0];
 var target2 = aa[1];
 let man = new ManBehavior(tab);
 var targetP = man.mouseMove({x: 0, y: 0}, target1);
-//targetP = man.mouseMove(targetP, target2);
-//man.scroll({x: 100, y: 100}, 300, false, man.ASC);
-//target2.style.border = '2px solid red';
-man.click(targetP, target);
+targetP = man.mouseMove(targetP, target2);
+//pause(1000);
+//var img = tab.get_image();
+  //  save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
 
-pause(2000);
+man.scroll(targetP, 300, false, man.ASC);
+
+pause(1000);
 var img = tab.get_image();
-save_to_file('c:\\test\\scrolled.png', img.get_bytes());
+    save_to_file('c:\\test\\scrolled1.png', img.get_bytes());
+
 
 log_ln(new Date().getTime());
 log_ln('test');
+
+
 
 
