@@ -27,20 +27,17 @@ export default class IBehavior{
     pause(milliseconds){}
     
     /**
-    * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     */
     mouseMove(target){}
     
     /**
-    * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     * if target if undefined click will be made by current point
     */
     click(target){}
     
     /**
-    * currentPoint - {x, y} - pixels by window
     * deltaPixels  - shifting in pixels
     * isHorizontal - if value is true, shifting will be by X axis
     * direction -  ASC or DESC
@@ -48,7 +45,6 @@ export default class IBehavior{
     scroll(deltaPixels, isHorizontal, direction){}
     
     /**
-    * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     * timeInMilliseconds - read time
     *
@@ -62,7 +58,6 @@ export default class IBehavior{
     selectText(targetPoint){}
     
     /**
-    * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     * value - string for filling field
     *
