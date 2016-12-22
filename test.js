@@ -33,17 +33,18 @@ pause(500);
 
 var document = tab.main_frame.eval('document');
 var link = document.querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
-var input = document.querySelector('input[type="text"]');
+var input = document.querySelectorAll('input[type="text"]');
 var aa = document.querySelectorAll('a');
 var target1 = aa[0];
 var target2 = aa[1];
+
 let man = new ManBehavior(tab, {x: 0, y: 0});
 
 man
-    //.scroll(1000, false, man.ASC)
-    .mouseMove(target1);
+    //.mouseMove(target1)
     //.mouseMove(target2)
-    //.click(link);
+    //.click(link)
+    .fillField(input[0], 'test and test');
 
 
 //man.fillField(input, 'test and test');
