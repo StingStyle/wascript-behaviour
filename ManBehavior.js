@@ -102,6 +102,17 @@ export const ManScroll = function(currentPoint, delta, isHorizontal, direction, 
     }
 }
 
+export const ManReadContent = function(currentPoint, targetElement, timeInMilliseconds){
+    let targetPoint = currentPoint;
+    if(targetElement !== undefined){
+        targetPoint = ManMouseMove.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME); 
+    }
+    
+    pause(timeInMilliseconds);
+    
+    return targetPoint;
+}
+
 export default class ManBehavior extends IBehavior{
     constructor(tab){
         super(tab);
@@ -122,6 +133,10 @@ export default class ManBehavior extends IBehavior{
     
     scroll(currentPoint, deltaPixels, isHorizontal, direction){
         return ManScroll.call(this, currentPoint, deltaPixels, isHorizontal, direction, this.SCROLL_SHIFT, this.SCROLL_SPEED, this.MAX_SCROLL_DELAY);
+    }
+    
+    readContent(currentPoint, targetElement, timeInMilliseconds){
+        return ManReadContent.call(this, currentPoint, targetElement, timeInMilliseconds);
     }
 }
 

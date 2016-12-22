@@ -38,7 +38,15 @@ export default class IBehavior{
     //
     scroll(currentPoint, deltaPixels, isHorizontal, direction){}
     
-    readContent(targetSelector, timeInMilliseconds){}    
-    selectText(){}    
-    fillField(targetSelector, value){}
+    /**
+    * currentPoint - {x, y} - pixels by window
+    * target - element object. For example, result of document.querySelector
+    * timeInMilliseconds - read time
+    *
+    */
+    readContent(currentPoint, target, timeInMilliseconds){}
+    
+    selectText(currentPoint, targetPoint){}
+    
+    fillField(target, value){}
 }
