@@ -80,9 +80,11 @@ export const ManScroll = function(currentPoint, delta, isHorizontal, direction, 
             y/speed - count of findermoves    
         */
         
-        const y = Math.floor(delta/shift/speed);
+        let y = Math.floor(delta/shift/speed);
+        y = y<=0 ? 1 : y;
         let dt = Math.floor(delta/y);
         let resultDt = 0;
+        
         for(let i=0; i<y; i++){
             const p = Math.floor(getRandomArbitrary(0, maxDelay));
             pause(p < 1 ? 1 : p);

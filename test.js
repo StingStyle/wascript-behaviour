@@ -36,16 +36,17 @@ var aa = document.querySelectorAll('a');
 var target1 = aa[0];
 var target2 = aa[1];
 let man = new ManBehavior(tab);
-var targetP = man.mouseMove({x: 0, y: 0}, target1);
-targetP = man.mouseMove(targetP, target2);
+var targetP = {x: 0, y: 0};
+
+//targetP = man.mouseMove(targetP, target1);
+//targetP = man.mouseMove(targetP, target2);
 //pause(1000);
 //var img = tab.get_image();
   //  save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
+man.scroll(targetP, 300, false, man.DESC);
 
-man.scroll(targetP, 300, false, man.ASC);
-
-pause(1000);
+pause(3000);
 var img = tab.get_image();
     save_to_file('c:\\test\\scrolled1.png', img.get_bytes());
 
