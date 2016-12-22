@@ -1,3 +1,8 @@
+/**
+* Autor: Dmitry Skripunov (https://github.com/DmitrySkripunov)
+* Behavior models interface
+*
+*/
 'use strict';
 
 export default class IBehavior{

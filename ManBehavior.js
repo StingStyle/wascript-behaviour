@@ -1,7 +1,12 @@
+/**
+* Autor: Dmitry Skripunov (https://github.com/DmitrySkripunov)
+* Man behavior model
+*
+*/
 'use sctrict';
 
 let {log_ln, pause, resume, string_of} = std.utils;
-let {t_mouse_event, t_mouse_button} = std.classes;
+let {t_mouse_event, t_mouse_button, t_event_flag} = std.classes;
 let {BROWSER} = std.globals;
 
 //import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
@@ -38,7 +43,11 @@ export const ManClick = function(currentPoint, targetElement, maxMoveTime){
     const mouseEvent = new t_mouse_event();
     mouseEvent.x = targetPoint.x;
     mouseEvent.y = targetPoint.y;
-    this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT);
+    
+    mouseEvent.modifiers = [t_event_flag.EF_LEFT_MOUSE_BUTTON];
+    this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, false, 1);
+    mouseEvent.modifiers = [];
+    this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, true, 1);
     
     return targetPoint;
 }
@@ -71,9 +80,11 @@ export const ManScroll = function(currentPoint, delta, isHorizontal, direction, 
             y/speed - count of findermoves    
         */
         
-        const y = Math.floor(delta/shift/speed);
+        let y = Math.floor(delta/shift/speed);
+        y = y<=0 ? 1 : y;
         let dt = Math.floor(delta/y);
         let resultDt = 0;
+        
         for(let i=0; i<y; i++){
             const p = Math.floor(getRandomArbitrary(0, maxDelay));
             pause(p < 1 ? 1 : p);
@@ -130,7 +141,7 @@ function cubicBezier(x0, y0, x1, y1){
     var max = 0;
     do{
         t.push(max);
-        max += 0.001;
+        max += 0.1;
     }
     while(max < 1);
     t.forEach(function(t){
