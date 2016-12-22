@@ -31,7 +31,8 @@ log_ln(new Date().getTime());
 
 var document = tab.main_frame.eval('document');
 var target = document.querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
-var aa = document.querySelectorAll('input[type="text"]');
+var input = document.querySelectorAll('input[type="text"]');
+var aa = document.querySelectorAll('a');
 var target1 = aa[0];
 var target2 = aa[1];
 let man = new ManBehavior(tab);
@@ -43,7 +44,7 @@ var targetP = {x: 0, y: 0};
 //var img = tab.get_image();
   //  save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
-man.fillField(targetP, target1, 'test and test');
+man.fillField(targetP, input[0], 'test and test');
 
 //man.scroll(targetP, 300, true, man.DESC);
 
