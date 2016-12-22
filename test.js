@@ -44,9 +44,9 @@ var targetP = {x: 0, y: 0};
 //var img = tab.get_image();
   //  save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
-//man.scroll(targetP, 300, false, man.DESC);
+man.scroll(targetP, 300, true, man.DESC);
 
-man.readContent(targetP, target1, 2000);
+//man.readContent(targetP, target1, 2000);
 
 pause(1000);
 var img = tab.get_image();

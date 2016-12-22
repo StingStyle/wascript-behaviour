@@ -6,7 +6,7 @@
 'use sctrict';
 
 let {log_ln, pause, resume, string_of} = std.utils;
-let {t_mouse_event, t_mouse_button, t_event_flag} = std.classes;
+let {t_mouse_event, t_key_event, t_mouse_button, t_event_flag, t_key_event_type} = std.classes;
 let {BROWSER} = std.globals;
 
 //import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
@@ -63,7 +63,16 @@ export const ManScroll = function(currentPoint, delta, isHorizontal, direction, 
     mouseEvent.y = currentPoint.y;
     
     if(isHorizontal){
-        //TODO: send press 'shift' button
+        const keyEvent = new t_key_event();
+        keyEvent.kind = t_key_event_type.KET_RAWKEYDOWN;
+        keyEvent.native_key_code = 16;
+        this.tab.send_key_event(keyEvent);
+
+        keyEvent.kind = t_key_event_type.KET_KEYDOWN;
+        keyEvent.native_key_code = 16;
+        this.tab.send_key_event(keyEvent);
+        
+        mouseEvent.modifiers = [t_event_flag.EF_SHIFT_DOWN];
     }
     
     if(delta <= shift){
@@ -99,6 +108,13 @@ export const ManScroll = function(currentPoint, delta, isHorizontal, direction, 
         const dx = isHorizontal ? ((direction == this.ASC) ? dt : -dt) : 0;
         const dy = !isHorizontal ? ((direction == this.ASC) ? dt : -dt) : 0;
         this.tab.send_mouse_wheel_event(mouseEvent, dx, dy);
+    }
+    
+    if(isHorizontal){
+        const keyEvent = new t_key_event();
+        keyEvent.kind = t_key_event_type.KET_KEYUP;
+        keyEvent.native_key_code = 16;
+        this.tab.send_key_event(keyEvent);
     }
 }
 
