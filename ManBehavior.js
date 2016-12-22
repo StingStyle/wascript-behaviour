@@ -12,14 +12,12 @@ let {BROWSER} = std.globals;
 //import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
 import IBehavior from 'beh/IBehavior';
 
-export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){    
-    let targetPoint = currentPoint;
+export const ManMouseMove = function(targetElement, maxMoveTime){
     if(targetElement !== undefined){
         const targetBox = targetElement.getBoundingClientRect();
         const targetX = getRandomArbitrary(targetBox.left, targetBox.right);
         const targetY = getRandomArbitrary(targetBox.top, targetBox.bottom);
-        targetPoint = {x: targetX, y: targetY};
-        const curve = cubicBezier(currentPoint.x, currentPoint.y, targetX, targetY);
+        const curve = cubicBezier(this._currentPoint.x, this._currentPoint.y, targetX, targetY);
         const _self = this;
         curve.forEach(function(t, i){
             const p = Math.floor(getRandomArbitrary(0, maxMoveTime));
@@ -29,27 +27,28 @@ export const ManMouseMove = function(currentPoint, targetElement, maxMoveTime){
             mouseEvent.y = t.y;
             _self.tab.send_mouse_move_event(mouseEvent);
         });
+        
+        this._currentPoint = {x: targetX, y: targetY};
     }
     
-    return targetPoint;
+    return this;
 }
 
-export const ManClick = function(currentPoint, targetElement, maxMoveTime){    
-    let targetPoint = currentPoint;
+export const ManClick = function(targetElement, maxMoveTime){
     if(targetElement !== undefined){
-        targetPoint = ManMouseMove.call(this, currentPoint, targetElement, maxMoveTime); 
+        ManMouseMove.call(this, targetElement, maxMoveTime); 
     }
     
     const mouseEvent = new t_mouse_event();
-    mouseEvent.x = targetPoint.x;
-    mouseEvent.y = targetPoint.y;
+    mouseEvent.x = this._currentPoint.x;
+    mouseEvent.y = this._currentPoint.y;
     
     mouseEvent.modifiers = [t_event_flag.EF_LEFT_MOUSE_BUTTON];
     this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, false, 1);
     mouseEvent.modifiers = [];
     this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, true, 1);
     
-    return targetPoint;
+    return this;
 }
 
 /**
@@ -57,10 +56,10 @@ export const ManClick = function(currentPoint, targetElement, maxMoveTime){
 *   speed - scroll speed (turn count per time)
 *   maxDelay - turn delay
 */
-export const ManScroll = function(currentPoint, delta, isHorizontal, direction, shift, speed, maxDelay){
+export const ManScroll = function(delta, isHorizontal, direction, shift, speed, maxDelay){
     const mouseEvent = new t_mouse_event();
-    mouseEvent.x = currentPoint.x;
-    mouseEvent.y = currentPoint.y;
+    mouseEvent.x = this._currentPoint.x;
+    mouseEvent.y = this._currentPoint.y;
     
     if(isHorizontal){
         const keyEvent = new t_key_event();
@@ -116,23 +115,23 @@ export const ManScroll = function(currentPoint, delta, isHorizontal, direction, 
         keyEvent.native_key_code = 16;
         this.tab.send_key_event(keyEvent);
     }
+    
+    return this;
 }
 
-export const ManReadContent = function(currentPoint, targetElement, timeInMilliseconds){
-    let targetPoint = currentPoint;
+export const ManReadContent = function(targetElement, timeInMilliseconds){
     if(targetElement !== undefined){
-        targetPoint = ManMouseMove.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME); 
+        ManMouseMove.call(this, targetElement, this.MAX_MOVE_TIME); 
     }
     
     pause(timeInMilliseconds);
     
-    return targetPoint;
+    return this;
 }
 
-export const ManFillField = function(currentPoint, targetElement, value, speed){
-    let targetPoint = currentPoint;
+export const ManFillField = function(targetElement, value, speed){
     if(targetElement !== undefined){
-        targetPoint = ManClick.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME); 
+        ManClick.call(this, targetElement, this.MAX_MOVE_TIME); 
         
         for(var i in value){
             this.tab.send_char(value.charAt(i));
@@ -142,39 +141,39 @@ export const ManFillField = function(currentPoint, targetElement, value, speed){
         
     }
     
-    return targetPoint;
+    return this;
 }
 
 export default class ManBehavior extends IBehavior{
-    constructor(tab){
-        super(tab);
+    constructor(tab, currentPoint){
+        super(tab, currentPoint);
         
         this.MAX_MOVE_TIME  = 8;  //in ms
         this.SCROLL_SHIFT   = 12; // pixels/wheel turn
         this.SCROLL_SPEED   = 30; // count of turns per time
-        this.MAX_SCROLL_DELAY = 500 // in ms
+        this.MAX_SCROLL_DELAY = 500; // in ms
         
-        this.MAX_FILL_FIELD_SPEED = 300 // in ms. Min is 20ms
+        this.MAX_FILL_FIELD_SPEED = 300; // in ms. Min is 20ms
     }
     
-    mouseMove(currentPoint, targetElement){
-       return ManMouseMove.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME);
+    mouseMove(targetElement){
+       return ManMouseMove.call(this, targetElement, this.MAX_MOVE_TIME);
     }
     
-    click(currentPoint, targetElement){
-        return ManClick.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME);
+    click(targetElement){
+        return ManClick.call(this, targetElement, this.MAX_MOVE_TIME);
     }
     
-    scroll(currentPoint, deltaPixels, isHorizontal, direction){
-        return ManScroll.call(this, currentPoint, deltaPixels, isHorizontal, direction, this.SCROLL_SHIFT, this.SCROLL_SPEED, this.MAX_SCROLL_DELAY);
+    scroll(deltaPixels, isHorizontal, direction){
+        return ManScroll.call(this, deltaPixels, isHorizontal, direction, this.SCROLL_SHIFT, this.SCROLL_SPEED, this.MAX_SCROLL_DELAY);
     }
     
-    readContent(currentPoint, targetElement, timeInMilliseconds){
-        return ManReadContent.call(this, currentPoint, targetElement, timeInMilliseconds);
+    readContent(targetElement, timeInMilliseconds){
+        return ManReadContent.call(this, targetElement, timeInMilliseconds);
     }
     
-    fillField(currentPoint, targetElement, value){
-        return ManFillField.call(this, currentPoint, targetElement, value, this.MAX_FILL_FIELD_SPEED);
+    fillField(targetElement, value){
+        return ManFillField.call(this, targetElement, value, this.MAX_FILL_FIELD_SPEED);
     }
 }
 

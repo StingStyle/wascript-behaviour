@@ -28,31 +28,30 @@ tab.on_paint = function() {
 
 log_ln('0');
 log_ln(new Date().getTime());
+tab.press_key(18);
+pause(500);
 
 var document = tab.main_frame.eval('document');
-var target = document.querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
-var aa = document.querySelectorAll('input[type="text"]');
+var link = document.querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
+var input = document.querySelector('input[type="text"]');
+var aa = document.querySelectorAll('a');
 var target1 = aa[0];
 var target2 = aa[1];
-let man = new ManBehavior(tab);
-var targetP = {x: 0, y: 0};
+let man = new ManBehavior(tab, {x: 0, y: 0});
 
-//targetP = man.mouseMove(targetP, target1);
-//targetP = man.mouseMove(targetP, target2);
-//pause(1000);
-//var img = tab.get_image();
-  //  save_to_file('c:\\test\\scrolled.png', img.get_bytes());
+man
+    //.scroll(1000, false, man.ASC)
+    .mouseMove(target1);
+    //.mouseMove(target2)
+    //.click(link);
 
-man.fillField(targetP, target1, 'test and test');
 
-//man.scroll(targetP, 300, true, man.DESC);
-
+//man.fillField(input, 'test and test');
 //man.readContent(targetP, target1, 2000);
-tab.press_key(18);
-pause(3000);
-pause(1000);
+
+pause(2000);
 var img = tab.get_image();
-    save_to_file('c:\\test\\scrolled1.png', img.get_bytes());
+    save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
 
 log_ln(new Date().getTime());
