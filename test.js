@@ -53,7 +53,7 @@ tab.press_key(18);
 pause(3000);
 pause(1000);
 var img = tab.get_image();
-    save_to_file('c:\\test\\scrolled1.png', img.get_bytes());
+    save_to_file('c:\\test\\scrolled.png', img.get_bytes());
 
 
 log_ln(new Date().getTime());
