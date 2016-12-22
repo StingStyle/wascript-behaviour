@@ -6,7 +6,7 @@
 'use strict';
 
 export default class IBehavior{
-    constructor(tab){
+    constructor(tab, currentPoint){
         this.tab = tab;
         this.ASC = 'asc';
         this.DESC = 'desc';
@@ -16,28 +16,36 @@ export default class IBehavior{
         this.SCROLL_SPEED   = 30; // count of turns per time
         this.MAX_SCROLL_DELAY = 500 // in ms
         this.MAX_FILL_FIELD_SPEED = 300 // in ms. Min is 20ms
+        
+        this._currentPoint = currentPoint;
     }
     
-    /*
+    /**
+    *
+    *
+    */
+    pause(milliseconds){}
+    
+    /**
     * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     */
-    mouseMove(currentPoint, target){}
+    mouseMove(target){}
     
-    /*
+    /**
     * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     * if target if undefined click will be made by current point
     */
-    click(currentPoint, target){}
+    click(target){}
     
-    /*
+    /**
     * currentPoint - {x, y} - pixels by window
     * deltaPixels  - shifting in pixels
     * isHorizontal - if value is true, shifting will be by X axis
     * direction -  ASC or DESC
     */
-    scroll(currentPoint, deltaPixels, isHorizontal, direction){}
+    scroll(deltaPixels, isHorizontal, direction){}
     
     /**
     * currentPoint - {x, y} - pixels by window
@@ -45,13 +53,13 @@ export default class IBehavior{
     * timeInMilliseconds - read time
     *
     */
-    readContent(currentPoint, target, timeInMilliseconds){}
+    readContent(target, timeInMilliseconds){}
     
     /**
     * @deprecated
     *
     */
-    selectText(currentPoint, targetPoint){}
+    selectText(targetPoint){}
     
     /**
     * currentPoint - {x, y} - pixels by window
@@ -59,5 +67,5 @@ export default class IBehavior{
     * value - string for filling field
     *
     */
-    fillField(currentPoint, target, value){}
+    fillField(target, value){}
 }
