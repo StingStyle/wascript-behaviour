@@ -34,21 +34,21 @@ pause(500);
 var document = tab.main_frame.eval('document');
 var link = document.querySelector('a[href="https://metrika.yandex.ru/dashboard?id=41295834"]');
 var input = document.querySelectorAll('input[type="text"]');
+var content = document.querySelectorAll('p');
 var aa = document.querySelectorAll('a');
 var target1 = aa[0];
 var target2 = aa[1];
 
 let man = new ManBehavior(tab, {x: 0, y: 0});
 
-man
-    //.mouseMove(target1)
-    //.mouseMove(target2)
-    //.click(link)
-    .fillField(input[0], 'test and test');
+man 
+    .mouseMove(target1)
+    .pause(100)
+    .mouseMove(target2)
+    .click(link)
+    .fillField(input[0], 'test');
 
-
-//man.fillField(input, 'test and test');
-//man.readContent(targetP, target1, 2000);
+man.readContent(content[0], 2000);
 
 pause(2000);
 var img = tab.get_image();

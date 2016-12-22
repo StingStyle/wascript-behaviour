@@ -20,20 +20,26 @@ export default class IBehavior{
         this._currentPoint = currentPoint;
     }
     
-    /*
+    /**
+    *
+    *
+    */
+    pause(milliseconds){}
+    
+    /**
     * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     */
     mouseMove(target){}
     
-    /*
+    /**
     * currentPoint - {x, y} - pixels by window
     * target - element object. For example, result of document.querySelector
     * if target if undefined click will be made by current point
     */
     click(target){}
     
-    /*
+    /**
     * currentPoint - {x, y} - pixels by window
     * deltaPixels  - shifting in pixels
     * isHorizontal - if value is true, shifting will be by X axis

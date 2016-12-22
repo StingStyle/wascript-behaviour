@@ -155,6 +155,11 @@ export default class ManBehavior extends IBehavior{
         this.MAX_FILL_FIELD_SPEED = 300; // in ms. Min is 20ms
     }
     
+    pause(milliseconds){
+        pause(milliseconds);
+        return this;
+    }
+    
     mouseMove(targetElement){
        return ManMouseMove.call(this, targetElement, this.MAX_MOVE_TIME);
     }
