@@ -37,16 +37,16 @@ export const ManMouseMove = function(targetElement, maxMoveTime){
 export const ManClick = function(targetElement, maxMoveTime){
     if(targetElement !== undefined){
         ManMouseMove.call(this, targetElement, maxMoveTime); 
+        
+        const mouseEvent = new t_mouse_event();
+        mouseEvent.x = this._currentPoint.x;
+        mouseEvent.y = this._currentPoint.y;
+
+        mouseEvent.modifiers = [t_event_flag.EF_LEFT_MOUSE_BUTTON];
+        this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, false, 1);
+        mouseEvent.modifiers = [];
+        this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, true, 1);
     }
-    
-    const mouseEvent = new t_mouse_event();
-    mouseEvent.x = this._currentPoint.x;
-    mouseEvent.y = this._currentPoint.y;
-    
-    mouseEvent.modifiers = [t_event_flag.EF_LEFT_MOUSE_BUTTON];
-    this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, false, 1);
-    mouseEvent.modifiers = [];
-    this.tab.send_mouse_click_event(mouseEvent, t_mouse_button.MB_LEFT, true, 1);
     
     return this;
 }
@@ -122,10 +122,9 @@ export const ManScroll = function(delta, isHorizontal, direction, shift, speed, 
 export const ManReadContent = function(targetElement, timeInMilliseconds){
     if(targetElement !== undefined){
         ManMouseMove.call(this, targetElement, this.MAX_MOVE_TIME); 
+        
+        pause(timeInMilliseconds);
     }
-    
-    pause(timeInMilliseconds);
-    
     return this;
 }
 
