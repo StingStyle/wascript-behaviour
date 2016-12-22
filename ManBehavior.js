@@ -129,6 +129,22 @@ export const ManReadContent = function(currentPoint, targetElement, timeInMillis
     return targetPoint;
 }
 
+export const ManFillField = function(currentPoint, targetElement, value, speed){
+    let targetPoint = currentPoint;
+    if(targetElement !== undefined){
+        targetPoint = ManClick.call(this, currentPoint, targetElement, this.MAX_MOVE_TIME); 
+        
+        for(var i in value){
+            this.tab.send_char(value.charAt(i));
+            const p = Math.floor(getRandomArbitrary(20, speed));
+            pause(p < 1 ? 1 : p);
+        }
+        
+    }
+    
+    return targetPoint;
+}
+
 export default class ManBehavior extends IBehavior{
     constructor(tab){
         super(tab);
@@ -137,6 +153,8 @@ export default class ManBehavior extends IBehavior{
         this.SCROLL_SHIFT   = 12; // pixels/wheel turn
         this.SCROLL_SPEED   = 30; // count of turns per time
         this.MAX_SCROLL_DELAY = 500 // in ms
+        
+        this.MAX_FILL_FIELD_SPEED = 300 // in ms. Min is 20ms
     }
     
     mouseMove(currentPoint, targetElement){
@@ -153,6 +171,10 @@ export default class ManBehavior extends IBehavior{
     
     readContent(currentPoint, targetElement, timeInMilliseconds){
         return ManReadContent.call(this, currentPoint, targetElement, timeInMilliseconds);
+    }
+    
+    fillField(currentPoint, targetElement, value){
+        return ManFillField.call(this, currentPoint, targetElement, value, this.MAX_FILL_FIELD_SPEED);
     }
 }
 
