@@ -9,7 +9,7 @@ let {log_ln, pause, resume, string_of} = std.utils;
 let {t_mouse_event, t_key_event, t_mouse_button, t_event_flag, t_key_event_type} = std.classes;
 let {BROWSER} = std.globals;
 
-import IBehavior from 'https://raw.githubusercontent.com/DmitrySkripunov/wascript-behaviour/master/IBehavior.js';
+import IBehavior from 'wascript-behavior/IBehavior.js';
 
 export const ManMouseMove = function(targetElement, maxMoveTime){
     if(targetElement !== undefined){
